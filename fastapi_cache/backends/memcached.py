@@ -18,6 +18,8 @@ class MemcachedBackend(Backend):
     async def set(self, key: str, value: bytes, expire: Optional[int] = None) -> None:
         await self.mcache.set(key.encode(), value, exptime=expire or 0)
 
-    async def clear(self, _: str | None = None, key: str | None = None) -> bool:
+    async def clear(self, _: str | None = None, key: str = "") -> bool:
+        if not key:
+            raise Exception("key is reuired")
         return await self.mcache.delete(key.encode())
 
