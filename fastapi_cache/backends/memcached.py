@@ -20,6 +20,6 @@ class MemcachedBackend(Backend):
 
     async def clear(self, _: str | None = None, key: str = "") -> bool:
         if not key:
-            raise Exception("key is reuired")
+            raise Exception("key is required")
         return await self.mcache.delete(key.encode())
 
